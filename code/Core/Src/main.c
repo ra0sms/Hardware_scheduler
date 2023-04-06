@@ -54,6 +54,19 @@ float latitude = 0;
 float longitude = 0;
 float altitude = 0;
 char out[100];
+
+/*TIMETABLE FOR ALL BANDS*/
+int time80[] = {2,22,42};
+int time40[] = {6,26,46};
+int time30[] = {8,28,48};
+int time20[] = {10,30,50};
+int time17[] = {12,32,52};
+int time15[] = {14,34,54};
+int time12[] = {16,36,56};
+int time10[] = {18,38,58};
+int timeOff1[] = {0,20,40};
+int timeOff2[] = {4,24,44};
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -147,7 +160,7 @@ uint32_t ReadFromEEPROM (uint32_t hexAddress){
 	return *(uint32_t*)hexAddress;
 }
 
-void ResetAllOutputs (){
+void ResetAllOutputs() {
 	LL_GPIO_ResetOutputPin(K1_GPIO_Port, K1_Pin);
 	LL_GPIO_ResetOutputPin(K2_GPIO_Port, K2_Pin);
 	LL_GPIO_ResetOutputPin(K3_GPIO_Port, K3_Pin);
@@ -156,70 +169,105 @@ void ResetAllOutputs (){
 	LL_GPIO_ResetOutputPin(K6_GPIO_Port, K6_Pin);
 	LL_GPIO_ResetOutputPin(K7_GPIO_Port, K7_Pin);
 	LL_GPIO_ResetOutputPin(K8_GPIO_Port, K8_Pin);
+	LL_GPIO_ResetOutputPin(A1_GPIO_Port, A1_Pin);
+	LL_GPIO_ResetOutputPin(A2_GPIO_Port, A2_Pin);
+	LL_GPIO_ResetOutputPin(A3_GPIO_Port, A3_Pin);
+	LL_GPIO_ResetOutputPin(A4_GPIO_Port, A4_Pin);
+	LL_GPIO_ResetOutputPin(A5_GPIO_Port, A5_Pin);
+	LL_GPIO_ResetOutputPin(A6_GPIO_Port, A6_Pin);
+	LL_GPIO_ResetOutputPin(A7_GPIO_Port, A7_Pin);
+	LL_GPIO_ResetOutputPin(A8_GPIO_Port, A8_Pin);
 }
 
 int IsTime80(){
-	if ((minute == 1 || minute == 21 || minute == 41) && (sec == 59)) return 1;
-	if (minute>=2 && minute<6) return 1;
-	if (minute>=22 && minute<26) return 1;
-	if (minute>=42 && minute<46) return 1;
+	if ((minute == (time80[0]-1) || minute == (time80[1]-1) || minute == (time80[2]-1)) && (sec == 59)) return 1;
+	if (minute>=time80[0] && minute<timeOff2[0]) return 1;
+	if (minute>=time80[1] && minute<timeOff2[1]) return 1;
+	if (minute>=time80[2] && minute<timeOff2[2]) return 1;
 	return 0;
 }
 
 int IsTime40(){
-	if ((minute == 5 || minute == 25 || minute == 45) && (sec == 59)) return 1;
-	if (minute>=6 && minute<8) return 1;
-	if (minute>=26 && minute<28) return 1;
-	if (minute>=46 && minute<48) return 1;
+	if ((minute == (time40[0]-1) || minute == (time40[1]-1) || minute == (time40[2]-1)) && (sec == 59)) return 1;
+	if (minute>=time40[0] && minute<time30[0]) return 1;
+	if (minute>=time40[1] && minute<time30[1]) return 1;
+	if (minute>=time40[2] && minute<time30[2]) return 1;
 	return 0;
 }
 
 int IsTime30(){
-	if ((minute == 7 || minute == 27 || minute == 47) && (sec == 59)) return 1;
-	if (minute>=8 && minute<10) return 1;
-	if (minute>=28 && minute<30) return 1;
-	if (minute>=48 && minute<50) return 1;
+	if ((minute == (time30[0]-1) || minute == (time30[1]-1) || minute == (time30[2]-1)) && (sec == 59)) return 1;
+	if (minute>=time30[0] && minute<time20[0]) return 1;
+	if (minute>=time30[1] && minute<time20[1]) return 1;
+	if (minute>=time30[2] && minute<time20[2]) return 1;
 	return 0;
 }
 
 int IsTime20(){
-	if ((minute == 9 || minute == 29 || minute == 49) && (sec == 59)) return 1;
-	if (minute>=10 && minute<12) return 1;
-	if (minute>=30 && minute<32) return 1;
-	if (minute>=50 && minute<52) return 1;
+	if ((minute == (time20[0]-1) || minute == (time20[1]-1)  || minute == (time20[2]-1) ) && (sec == 59)) return 1;
+	if (minute>=time20[0] && minute<time17[0]) return 1;
+	if (minute>=time20[1] && minute<time17[1]) return 1;
+	if (minute>=time20[2] && minute<time17[2]) return 1;
 	return 0;
 }
 
 int IsTime17(){
-	if ((minute == 11 || minute == 31 || minute == 51) && (sec == 59)) return 1;
-	if (minute>=12 && minute<14) return 1;
-	if (minute>=32 && minute<34) return 1;
-	if (minute>=52 && minute<54) return 1;
+	if ((minute == (time17[0]-1) || minute == (time17[1]-1) || minute == (time17[2]-1)) && (sec == 59)) return 1;
+	if (minute>=time17[0] && minute<time15[0]) return 1;
+	if (minute>=time17[1] && minute<time15[1]) return 1;
+	if (minute>=time17[2] && minute<time15[2]) return 1;
 	return 0;
 }
 
 int IsTime15(){
-	if ((minute == 13 || minute == 33 || minute == 53) && (sec == 59)) return 1;
-	if (minute>=14 && minute<16) return 1;
-	if (minute>=34 && minute<36) return 1;
-	if (minute>=54 && minute<56) return 1;
+	if ((minute == (time15[0]-1) || minute == (time15[1]-1) || minute == (time15[2]-1)) && (sec == 59)) return 1;
+	if (minute>=time15[0] && minute<time12[0]) return 1;
+	if (minute>=time15[1] && minute<time12[1]) return 1;
+	if (minute>=time15[2] && minute<time12[2]) return 1;
 	return 0;
 }
 
 int IsTime12(){
-	if ((minute == 15 || minute == 35 || minute == 55) && (sec == 59)) return 1;
-	if (minute>=16 && minute<18) return 1;
-	if (minute>=36 && minute<38) return 1;
-	if (minute>=56 && minute<58) return 1;
+	if ((minute == (time12[0]-1) || minute == (time12[1]-1) || minute == (time12[2]-1)) && (sec == 59)) return 1;
+	if (minute>=time12[0] && minute<time10[0]) return 1;
+	if (minute>=time12[1] && minute<time10[1]) return 1;
+	if (minute>=time12[2] && minute<time10[2]) return 1;
 	return 0;
 }
 
 int IsTime10(){
-	if ((minute == 17 || minute == 37 || minute == 57) && (sec == 59)) return 1;
-	if (minute>=18 && minute<22) return 1;
-	if (minute>=38 && minute<42) return 1;
-	if (minute>=58 && minute<60) return 1;
+	if ((minute == (time10[0]-1) || minute == (time10[1]-1) || minute == (time10[2]-1) ) && (sec == 59)) return 1;
+	if (minute>=time10[0] && minute<timeOff1[0]) return 1;
+	if (minute>=time10[1] && minute<timeOff1[1]) return 1;
+	if (minute>=time10[2] && minute<timeOff1[2]) return 1;
 	if (minute<2) return 1;
+	return 0;
+}
+
+int IsTimeOff() {
+	if ((minute == (timeOff1[0] - 1) || minute == (timeOff1[1] - 1)
+			|| minute == (timeOff1[2] - 1)) && (sec == 59))
+		return 1;
+	if (minute >= timeOff1[0] && minute < time80[0])
+		return 1;
+	if (minute >= timeOff1[1] && minute < time80[1])
+		return 1;
+	if (minute >= timeOff1[2] && minute < time80[2])
+		return 1;
+	if (minute < 2)
+		return 1;
+
+	if ((minute == (timeOff2[0] - 1) || minute == (timeOff2[1] - 1)
+			|| minute == (timeOff2[2] - 1)) && (sec == 59))
+		return 1;
+	if (minute >= timeOff2[0] && minute < time40[0])
+		return 1;
+	if (minute >= timeOff2[1] && minute < time40[1])
+		return 1;
+	if (minute >= timeOff2[2] && minute < time40[2])
+		return 1;
+	if (minute < 2)
+		return 1;
 	return 0;
 }
 
@@ -228,34 +276,45 @@ void WSPR_Schedule() {
 	if (IsTime80()) {
 		ResetAllOutputs();
 		LL_GPIO_SetOutputPin(K1_GPIO_Port, K1_Pin);
+		LL_GPIO_SetOutputPin(A1_GPIO_Port, A1_Pin);
 	}
 	if (IsTime40()) {
 		ResetAllOutputs();
 		LL_GPIO_SetOutputPin(K2_GPIO_Port, K2_Pin);
+		LL_GPIO_SetOutputPin(A2_GPIO_Port, A2_Pin);
 	}
 	if (IsTime30()) {
 		ResetAllOutputs();
 		LL_GPIO_SetOutputPin(K3_GPIO_Port, K3_Pin);
+		LL_GPIO_SetOutputPin(A3_GPIO_Port, A3_Pin);
 	}
 	if (IsTime20()) {
 		ResetAllOutputs();
 		LL_GPIO_SetOutputPin(K4_GPIO_Port, K4_Pin);
+		LL_GPIO_SetOutputPin(A4_GPIO_Port, A4_Pin);
 	}
 	if (IsTime17()) {
 		ResetAllOutputs();
 		LL_GPIO_SetOutputPin(K5_GPIO_Port, K5_Pin);
+		LL_GPIO_SetOutputPin(A5_GPIO_Port, A5_Pin);
 	}
 	if (IsTime15()) {
 		ResetAllOutputs();
 		LL_GPIO_SetOutputPin(K6_GPIO_Port, K6_Pin);
+		LL_GPIO_SetOutputPin(A6_GPIO_Port, A6_Pin);
 	}
 	if (IsTime12()) {
 		ResetAllOutputs();
 		LL_GPIO_SetOutputPin(K7_GPIO_Port, K7_Pin);
+		LL_GPIO_SetOutputPin(A7_GPIO_Port, A7_Pin);
 	}
 	if (IsTime10()) {
 		ResetAllOutputs();
 		LL_GPIO_SetOutputPin(K8_GPIO_Port, K8_Pin);
+		LL_GPIO_SetOutputPin(A8_GPIO_Port, A8_Pin);
+	}
+	if (IsTimeOff()) {
+		ResetAllOutputs();
 	}
 
 }

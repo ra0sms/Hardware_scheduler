@@ -80,6 +80,8 @@ Also the devise has `EXT` out which can use for external relay modules, for exam
 
 **Outputs**: 8 relay outputs and 8 TTL (3.3V) outputs for an external relay module
 
-## Using
+**Recommended enclosure**: [Gainta G311](https://www.gainta.com/en/g311.html)
+
+## Example of use
 
 For example, consider the case of using 8 single-band antennas and an external antenna switch (12V for switching). It is necessary to set the jumpers on all outputs to the `IN_VDC` position. `NO` contacts of outputs 1-8 connect with the control cable of the antenna switch (with the corresponding antenna ports). Connect 12V power to the board and connect the GPS antenna. The `1Hz` LED on the board indicates the presence of synchronization with the GPS (it should blink once per second). LEDs 1 to 8 indicate the active output. After synchronizing with the GPS, the device will automatically switch antennas depending on the band on which it is currently transmitting.

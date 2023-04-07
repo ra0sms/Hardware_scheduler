@@ -22,4 +22,22 @@ Since we have a schedule, we can switch antennas (or matching a multiband tuner 
 
 <img src="DipTrace/cron_schema.jpg" alt="schema" style="zoom:50%;" />
 
-It is based on MCU STM32G030K8 and GPS receiver module ATGM332D.
+It is based on MCU STM32G030K8 and GPS receiver module ATGM332D. The source code for STM32CubeIDE you can find in `code` folder. The timetable for WSPR beacon is presented as arrays (see `code/core/src/main.c`):
+
+```c
+/*TIMETABLE FOR ALL BANDS*/
+int time80[] = {2,22,42};
+int time40[] = {6,26,46};
+int time30[] = {8,28,48};
+int time20[] = {10,30,50};
+int time17[] = {12,32,52};
+int time15[] = {14,34,54};
+int time12[] = {16,36,56};
+int time10[] = {18,38,58};
+int timeOff1[] = {0,20,40};
+int timeOff2[] = {4,24,44};
+```
+
+The output signals are a relay output that can switch ground or supply voltage. 
+
+![main](docs/main.jpg)

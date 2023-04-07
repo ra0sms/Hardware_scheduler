@@ -41,3 +41,15 @@ int timeOff2[] = {4,24,44};
 The output signals are a relay output that can switch ground or supply voltage. 
 
 ![main](docs/main.jpg)
+
+The voltage supply of the device is from 5 to 15V. The same voltage can be applied to outputs 1-8 using jumpers on the board.
+
+![jamper](docs/settings.jpg)
+
+`IN_VDC` - an active output is power supply
+
+`GND` - an active output is ground.
+
+Or you can remove any jumper and connect an external power supply to `COM` connector of each output.
+
+![output](docs/output.jpg)

@@ -15,3 +15,11 @@ For each enabled Band the scheduler will start to transmit at the corresponding 
 The WSPR beacon uses a transmitting antenna, which cannot be simultaneously tuned on all bands from 80 to 10 meters. SWR on different bands will not be optimal. Therefore, the question arises - how to improve this system, taking into account the fact that we are tied to the schedule.
 
 ![diagramm](docs/Sсheduler.jpg)
+
+## What should we do?
+
+Since we have a schedule, we can switch antennas (or matching a multiband tuner near our antenna) between bands according to the schedule. We can also use GPS signals for synchronization. Thus the scheme of this device was created.
+
+<img src="DipTrace/cron_schema.jpg" alt="schema" style="zoom:50%;" />
+
+It is based on MCU STM32G030K8 and GPS receiver module ATGM332D.
